@@ -3,6 +3,7 @@
 //Insertion sort function
 //Arguments: pointer to array(*array) and size of array(n)
 //Time Complexity(worst) : O(n^2)
+//Returns the pointer to the first element in array
 int *insertionSort(int *array, size_t n)
 {
     //Print the inital array
@@ -51,13 +52,6 @@ int main()
 
     //call insertion sort function
     int *array = insertionSort(a, n);
-
-    // std::cout << a << " " << array << std::endl;
-    // for (int i = 0; i < n; i++)
-    // {
-    //     std::cout << array + i << " ";
-    // }
-    // std::cout << std::endl;
 
     return 0;
 }
