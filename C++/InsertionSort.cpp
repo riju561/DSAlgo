@@ -23,7 +23,7 @@ int *insertionSort(int *array, size_t n)
         int i = j - 1;
         //While loop
         //Conditions : i shouldn't be out of bounds of array and array[i] greater than key
-        //Keep of shifting elements right until end of array is reached(left end) and element is greater than key
+        //Keep on shifting elements right until end of array is reached(left end) and element is greater than key
         while (i >= 0 && *(array + i) > key)
         {
             *(array + i + 1) = *(array + i);
