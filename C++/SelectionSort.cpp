@@ -15,7 +15,7 @@ int *selectionSort(int *array, size_t n)
     std::cout << std::endl;
 
     //Selection Sort Algo
-    //For loop from o to length of array
+    //For loop from 0 to length of array
     for (int i = 0; i < n; i++)
     {
         int min = i;
