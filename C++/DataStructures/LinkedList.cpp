@@ -3,23 +3,31 @@
 using namespace std;
 
 //Structure to hold linked list data
-struct node
+struct llnode
 {
     int data;
-    struct node *next;
+    struct llnode *next;
+};
+
+//Structure to hold doubly linked list
+struct dllnode
+{
+    int data;
+    struct dllnode *next;
+    struct dllnode *prev;
 };
 
 //Class for linked list
 class LinkedList
 {
-private:
-    struct node *head;
+protected:
+    struct llnode *head;
     int count;
 
     //Counter function(counts the number of elements in linked list)
     int counter()
     {
-        struct node *ptr = head;
+        struct llnode *ptr = head;
         if (head == NULL)
         {
             return 0;
@@ -42,41 +50,10 @@ public:
     }
 
     //Add to a linked list at the end
-    void addToLinkedListAtEnd(int data)
-    {
-        struct node *ptr = head;
-        struct node *temp = (struct node *)malloc(sizeof(struct node));
-        temp->data = data;
-        temp->next = NULL;
-        if (head == NULL)
-        {
-            head = temp;
-            count++;
-            return;
-        }
-        while (ptr->next != NULL)
-        {
-            ptr = ptr->next;
-        }
-        ptr->next = temp;
-        count++;
-    }
+    virtual void addToLinkedListAtEnd(int data) = 0;
 
     //Add to a linked list in the front
-    void addToLinkedListAtFront(int data)
-    {
-        struct node *temp = (struct node *)malloc(sizeof(struct node));
-        temp->data = data;
-        if (head == NULL)
-        {
-            head = temp;
-            count++;
-            return;
-        }
-        temp->next = head;
-        head = temp;
-        count++;
-    }
+    virtual void addToLinkedListAtFront(int data) = 0;
 
     //Add to linked list at an index
     void addToLinkedListAtIndex(int data, int index)
@@ -98,13 +75,13 @@ public:
         }
         else
         {
-            struct node *ptr = head;
+            struct llnode *ptr = head;
             int i = 0;
             while (ptr->next != NULL)
             {
                 if (index == i + 1)
                 {
-                    struct node *temp = (struct node *)malloc(sizeof(struct node));
+                    struct llnode *temp = (struct llnode *)malloc(sizeof(struct llnode));
                     temp->data = data;
                     temp->next = ptr->next;
                     ptr->next = temp;
@@ -125,7 +102,7 @@ public:
         {
             return -1;
         }
-        struct node *ptr = head;
+        struct llnode *ptr = head;
         int i = 0;
         while (ptr->next != NULL)
         {
@@ -155,7 +132,7 @@ public:
         }
         else if (index == count - 1)
         {
-            struct node *ptr = head;
+            struct llnode *ptr = head;
             while (ptr->next->next != NULL)
             {
                 ptr = ptr->next;
@@ -166,7 +143,7 @@ public:
         }
         else
         {
-            struct node *ptr = head;
+            struct llnode *ptr = head;
             int i = 0;
             while (ptr->next != NULL)
             {
@@ -186,7 +163,7 @@ public:
     //Reverse a linked list
     void reverseLinkedList()
     {
-        struct node *prev = NULL, *curr = head, *next;
+        struct llnode *prev = NULL, *curr = head, *next;
         while (curr != NULL)
         {
             next = curr->next;
@@ -206,7 +183,7 @@ public:
         {
             return;
         }
-        struct node *ptr = head, *tempPtr;
+        struct llnode *ptr = head, *tempPtr;
         int temp;
         while (ptr->next != NULL)
         {
@@ -239,7 +216,7 @@ public:
         {
             cout << "Empty Linked List" << endl;
         }
-        struct node *ptr = head;
+        struct llnode *ptr = head;
         while (ptr->next != NULL)
         {
             cout << ptr->data << "-> ";
@@ -253,14 +230,14 @@ public:
     {
         return head == NULL ? true : false;
     }
-    friend LinkedList mergeTwoLinkedLists(LinkedList ll1, LinkedList ll2);
 };
 
 //Merging two linked lists
-LinkedList mergeTwoLinkedLists(LinkedList ll1, LinkedList ll2)
+template <typename T>
+T mergeTwoLinkedLists(T ll1, T ll2)
 {
-    LinkedList ll;
-    struct node *ptr1 = ll1.head, *ptr2 = ll2.head;
+    T ll;
+    struct llnode *ptr1 = ll1.head, *ptr2 = ll2.head;
     if (ll1.isEmpty())
     {
         while (ptr2 != NULL)
@@ -293,10 +270,144 @@ LinkedList mergeTwoLinkedLists(LinkedList ll1, LinkedList ll2)
     return ll;
 }
 
+class SinglyLinkedList : public LinkedList
+{
+public:
+    SinglyLinkedList() : LinkedList() {}
+    void addToLinkedListAtEnd(int data)
+    {
+        struct llnode *ptr = head;
+        struct llnode *temp = (struct llnode *)malloc(sizeof(struct llnode));
+        temp->data = data;
+        temp->next = NULL;
+        if (head == NULL)
+        {
+            head = temp;
+            count++;
+            return;
+        }
+        while (ptr->next != NULL)
+        {
+            ptr = ptr->next;
+        }
+        ptr->next = temp;
+        count++;
+    }
+    void addToLinkedListAtFront(int data)
+    {
+        struct llnode *temp = (struct llnode *)malloc(sizeof(struct llnode));
+        temp->data = data;
+        if (head == NULL)
+        {
+            head = temp;
+            count++;
+            return;
+        }
+        temp->next = head;
+        head = temp;
+        count++;
+    }
+    friend SinglyLinkedList mergeTwoLinkedLists(SinglyLinkedList ll1, SinglyLinkedList ll2);
+};
+
+class DoublyLinkedList : public LinkedList
+{
+protected:
+    struct dllnode *head;
+    struct dllnode *rear;
+
+public:
+    DoublyLinkedList()
+    {
+        head = NULL;
+        rear = NULL;
+        count = 0;
+    }
+    void addToLinkedListAtEnd(int data)
+    {
+        struct dllnode *ptr = head;
+        struct dllnode *temp = (struct dllnode *)malloc(sizeof(struct dllnode));
+        temp->data = data;
+        temp->next = NULL;
+        if (head == NULL)
+        {
+            head = temp;
+            count++;
+            return;
+        }
+        while (ptr->next != NULL)
+        {
+            ptr = ptr->next;
+        }
+        ptr->next = temp;
+        count++;
+    }
+    void addToLinkedListAtFront(int data)
+    {
+        struct dllnode *temp = (struct dllnode *)malloc(sizeof(struct dllnode));
+        temp->data = data;
+        if (head == NULL)
+        {
+            head = temp;
+            count++;
+            return;
+        }
+        temp->next = head;
+        head = temp;
+        count++;
+    }
+    friend DoublyLinkedList mergeTwoLinkedLists(DoublyLinkedList ll1, DoublyLinkedList ll2);
+};
+class CircularLinkedList : public LinkedList
+{
+protected:
+    struct llnode *rear;
+
+public:
+    CircularLinkedList() : LinkedList()
+    {
+        rear = NULL;
+    }
+    void addToLinkedListAtEnd(int data)
+    {
+        struct llnode *ptr = head;
+        struct llnode *temp = (struct llnode *)malloc(sizeof(struct llnode));
+        temp->data = data;
+        temp->next = NULL;
+        if (head == NULL)
+        {
+            head = temp;
+            count++;
+            return;
+        }
+        while (ptr->next != NULL)
+        {
+            ptr = ptr->next;
+        }
+        ptr->next = temp;
+        count++;
+    }
+    void addToLinkedListAtFront(int data)
+    {
+        struct llnode *temp = (struct llnode *)malloc(sizeof(struct llnode));
+        temp->data = data;
+        if (head == NULL)
+        {
+            head = temp;
+            count++;
+            return;
+        }
+        temp->next = head;
+        head = temp;
+        count++;
+    }
+    friend CircularLinkedList mergeTwoLinkedLists(CircularLinkedList ll1, CircularLinkedList ll2);
+};
+
 int main()
 {
     //Testing out the functions
-    LinkedList ll;
+    SinglyLinkedList ll;
     for (int i = 1; i <= 10; i++)
     {
         ll.addToLinkedListAtEnd(i);
@@ -319,7 +430,7 @@ int main()
     cout << "Count: " << ll.getCount() << endl;
     cout << "Index of 3: " << ll.indexOfData(3) << endl;
 
-    LinkedList ll1, ll2, ll3, ll4, ll5, ll6, ll7, ll8, ll9;
+    SinglyLinkedList ll1, ll2, ll3, ll4, ll5, ll6, ll7, ll8, ll9;
 
     for (int i = 1; i <= 10; i++)
     {
@@ -346,7 +457,7 @@ int main()
     ll9 = mergeTwoLinkedLists(ll7, ll8);
     ll9.printLinkedList();
 
-    LinkedList ll10;
+    SinglyLinkedList ll10;
 
     ll10.addToLinkedListAtEnd(19230);
     ll10.addToLinkedListAtEnd(19232123);
