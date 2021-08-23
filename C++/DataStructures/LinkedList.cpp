@@ -298,6 +298,8 @@ public:
         if (head == NULL)
         {
             head = temp;
+            head->prev = NULL;
+            rear = head;
             count++;
             return;
         }
@@ -306,21 +308,55 @@ public:
             ptr = ptr->next;
         }
         ptr->next = temp;
+        rear = ptr->next;
+        rear->prev = ptr;
         count++;
     }
     void addToLinkedListAtFront(int data)
     {
         struct dllnode *temp = (struct dllnode *)malloc(sizeof(struct dllnode));
         temp->data = data;
+        temp->prev = NULL;
         if (head == NULL)
         {
             head = temp;
+            head->next = NULL;
+            rear = head;
             count++;
             return;
         }
         temp->next = head;
+        head->prev = temp;
         head = temp;
         count++;
+    }
+    void printLinkedList()
+    {
+        if (head == NULL)
+        {
+            cout << "Empty Linked List" << endl;
+        }
+        struct dllnode *ptr = head;
+        while (ptr->next != NULL)
+        {
+            cout << ptr->data << " <-> ";
+            ptr = ptr->next;
+        }
+        cout << ptr->data << "-> NULL" << endl;
+    }
+    void printLinkedListReverse()
+    {
+        if (head == NULL)
+        {
+            cout << "Empty Linked List" << endl;
+        }
+        struct dllnode *ptr = rear;
+        while (ptr->prev != NULL)
+        {
+            cout << ptr->data << " <-> ";
+            ptr = ptr->prev;
+        }
+        cout << ptr->data << "-> NULL" << endl;
     }
     void addToLinkedListAtIndex(int data, int index)
     {
@@ -632,6 +668,7 @@ public:
     {
         struct llnode *prev = NULL, *curr = head, *next;
         int i = 0;
+        rear = head;
         while (true)
         {
             if (i > 0 && curr == head)
@@ -655,11 +692,21 @@ public:
         }
         struct llnode *ptr = head, *tempPtr;
         int temp;
-        while (ptr->next != NULL)
+        int i = 0, j = 0;
+        while (true)
         {
-            tempPtr = head;
-            while (tempPtr->next != NULL)
+            if (i > 0 && ptr->next == head)
             {
+                break;
+            }
+            tempPtr = head;
+            j = 0;
+            while (true)
+            {
+                if (j > 0 && tempPtr->next == head)
+                {
+                    break;
+                }
                 if (tempPtr->data > tempPtr->next->data)
                 {
                     temp = tempPtr->data;
@@ -667,8 +714,10 @@ public:
                     tempPtr->next->data = temp;
                 }
                 tempPtr = tempPtr->next;
+                j++;
             }
             ptr = ptr->next;
+            i++;
         }
         return;
     }
@@ -930,5 +979,23 @@ int main()
     cll3.reverseLinkedList();
     cll3.printLinkedList();
 
+    cll3.sortLinkedList();
+    cll3.printLinkedList();
+
+    DoublyLinkedList dll1, dll2, dll3;
+    for (int i = 1; i <= 10; i++)
+    {
+        dll1.addToLinkedListAtEnd(i);
+    }
+    dll1.printLinkedList();
+    dll1.printLinkedListReverse();
+
+    for (int i = 0; i > -10; i--)
+    {
+        dll1.addToLinkedListAtFront(i);
+    }
+    // dll1.addToLinkedListAtFront(10);
+    dll1.printLinkedList();
+    dll1.printLinkedListReverse();
     return 0;
 }
