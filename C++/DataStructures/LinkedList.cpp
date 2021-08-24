@@ -386,8 +386,10 @@ public:
                     struct dllnode *temp = (struct dllnode *)malloc(sizeof(struct dllnode));
                     temp->data = data;
                     temp->next = ptr->next;
+                    ptr->next->prev = temp;
+                    temp->prev = ptr;
                     ptr->next = temp;
-                    count += 1;
+                    count++;
                     return;
                 }
                 ptr = ptr->next;
@@ -425,6 +427,7 @@ public:
         else if (index == 0)
         {
             head = head->next;
+            head->prev = NULL;
             count--;
             return;
         }
@@ -436,6 +439,7 @@ public:
                 ptr = ptr->next;
             }
             ptr->next = NULL;
+            rear = ptr;
             count--;
             return;
         }
@@ -448,6 +452,7 @@ public:
                 if (index == i + 1)
                 {
                     ptr->next = ptr->next->next;
+                    ptr->next->prev = ptr;
                     count--;
                     return;
                 }
@@ -459,15 +464,17 @@ public:
     }
     void reverseLinkedList()
     {
-        struct dllnode *prev = NULL, *curr = head, *next;
+        struct dllnode *prev = NULL, *curr = head, *next = NULL;
         while (curr != NULL)
         {
             next = curr->next;
-            curr->next = prev;
-            prev = curr;
+            curr->next = curr->prev;
+            curr->prev = next;
             curr = next;
         }
-        head = prev;
+        next = head;
+        head = rear;
+        rear = next;
     }
     void sortLinkedList()
     {
@@ -765,7 +772,7 @@ DoublyLinkedList mergeTwoLinkedLists(DoublyLinkedList ll1, DoublyLinkedList ll2)
 {
     DoublyLinkedList ll;
     struct dllnode *ptr1 = ll1.head, *ptr2 = ll2.head;
-    if (ll1.isEmpty())
+    if (ll1.head == ll1.rear)
     {
         while (ptr2 != NULL)
         {
@@ -773,7 +780,7 @@ DoublyLinkedList mergeTwoLinkedLists(DoublyLinkedList ll1, DoublyLinkedList ll2)
             ptr2 = ptr2->next;
         }
     }
-    else if (ll2.isEmpty())
+    else if (ll2.head == ll2.rear)
     {
         while (ptr1 != NULL)
         {
@@ -859,26 +866,34 @@ int main()
 {
     //Testing out the functions
     SinglyLinkedList ll;
+    cout << "Adding in the end of singly linked list" << endl;
     for (int i = 1; i <= 10; i++)
     {
         ll.addToLinkedListAtEnd(i);
     }
+    cout << "Adding at front of singly linked list" << endl;
     for (int i = 0; i > -5; i--)
     {
         ll.addToLinkedListAtFront(i);
     }
     ll.printLinkedList();
 
+    cout << "Getting count of elements in singly linked list" << endl;
     cout << "Count: " << ll.getCount() << endl;
 
+    cout << "Finding index of element in singly linked list" << endl;
     cout << "Index of 3: " << ll.indexOfData(3) << endl;
 
+    cout << "Adding at index in singly linked list" << endl;
     ll.addToLinkedListAtIndex(11, 14);
     ll.addToLinkedListAtIndex(-5, 0);
     ll.addToLinkedListAtIndex(-15, 5);
     ll.printLinkedList();
 
+    cout << "Getting count of elements in singly linked list" << endl;
     cout << "Count: " << ll.getCount() << endl;
+
+    cout << "Finding index of element in singly linked list" << endl;
     cout << "Index of 3: " << ll.indexOfData(3) << endl;
 
     SinglyLinkedList ll1, ll2, ll3, ll4, ll5, ll6, ll7, ll8, ll9;
@@ -887,6 +902,8 @@ int main()
     {
         ll1.addToLinkedListAtEnd(i);
     }
+
+    cout << "Merging two singly linked list" << endl;
     for (int i = 11; i <= 20; i++)
     {
         ll2.addToLinkedListAtEnd(i);
@@ -894,6 +911,7 @@ int main()
     ll3 = mergeTwoLinkedLists(ll1, ll2);
     ll3.printLinkedList();
 
+    cout << "Merging two singly linked list" << endl;
     for (int i = 1; i <= 10; i++)
     {
         ll4.addToLinkedListAtEnd(i);
@@ -901,6 +919,7 @@ int main()
     ll6 = mergeTwoLinkedLists(ll4, ll5);
     ll6.printLinkedList();
 
+    cout << "Merging two singly linked list" << endl;
     for (int i = 11; i <= 20; i++)
     {
         ll8.addToLinkedListAtEnd(i);
@@ -910,6 +929,7 @@ int main()
 
     SinglyLinkedList ll10;
 
+    cout << "Adding in the end of singly linked list" << endl;
     ll10.addToLinkedListAtEnd(19230);
     ll10.addToLinkedListAtEnd(19232123);
     ll10.addToLinkedListAtEnd(3248720);
@@ -918,24 +938,30 @@ int main()
     ll10.addToLinkedListAtEnd(293);
     ll10.addToLinkedListAtEnd(39034);
     ll10.addToLinkedListAtEnd(32);
-
     ll10.printLinkedList();
+
+    cout << "Sorting singly linked list" << endl;
     ll10.sortLinkedList();
     ll10.printLinkedList();
 
+    cout << "Reversing singly linked list" << endl;
     ll10.reverseLinkedList();
     ll10.printLinkedList();
 
+    cout << "Deleting the start of singly linked list" << endl;
     ll10.deleteFromLinkedList(0);
     ll10.printLinkedList();
 
+    cout << "Deleting last index of singly linked list" << endl;
     ll10.deleteFromLinkedList(6);
     ll10.printLinkedList();
 
+    cout << "Deleting random index of singly linked list" << endl;
     ll10.deleteFromLinkedList(3);
     ll10.printLinkedList();
 
     CircularLinkedList cll1, cll2, cll3;
+    cout << "Adding in the end of circular linked list" << endl;
     cll1.addToLinkedListAtEnd(1);
     cll1.addToLinkedListAtEnd(2);
     cll1.addToLinkedListAtEnd(3);
@@ -944,6 +970,7 @@ int main()
     cll1.addToLinkedListAtEnd(6);
     cll1.printLinkedList();
 
+    cout << "Adding at front of circular linked list" << endl;
     cll1.addToLinkedListAtFront(0);
     cll1.addToLinkedListAtFront(-1);
     cll1.addToLinkedListAtFront(-2);
@@ -956,33 +983,43 @@ int main()
     cll2.addToLinkedListAtEnd(4);
     cll2.addToLinkedListAtEnd(5);
     cll2.addToLinkedListAtEnd(6);
-    cll2.printLinkedList();
 
+    cout << "Merging two circular linked list" << endl;
     cll3 = mergeTwoLinkedLists(cll1, cll2);
 
+    cout << "Adding at index in circular linked list" << endl;
     cll3.addToLinkedListAtIndex(10, 3);
     cll3.printLinkedList();
 
+    cout << "Getting count of elements in circular linked list" << endl;
     cout << "Count : " << cll3.getCount() << endl;
 
+    cout << "Deleting the start of circular linked list" << endl;
     cll3.deleteFromLinkedList(0);
     cll3.printLinkedList();
 
+    cout << "Deleting random index of circular linked list" << endl;
     cll3.deleteFromLinkedList(10);
     cll3.printLinkedList();
 
+    cout << "Deleting last index of circular linked list" << endl;
     cll3.deleteFromLinkedList(14);
     cll3.printLinkedList();
 
+    cout << "Finding index of element in circular linked list" << endl;
     cout << "Index of 3: " << cll3.indexOfData(3) << endl;
 
+    cout << "Reversing circular linked list" << endl;
     cll3.reverseLinkedList();
     cll3.printLinkedList();
 
+    cout << "Sorting circular linked list" << endl;
     cll3.sortLinkedList();
     cll3.printLinkedList();
 
     DoublyLinkedList dll1, dll2, dll3;
+
+    cout << "Adding in the end of doubly linked list" << endl;
     for (int i = 1; i <= 10; i++)
     {
         dll1.addToLinkedListAtEnd(i);
@@ -990,12 +1027,57 @@ int main()
     dll1.printLinkedList();
     dll1.printLinkedListReverse();
 
+    cout << "Adding at front of doubly linked list" << endl;
     for (int i = 0; i > -10; i--)
     {
         dll1.addToLinkedListAtFront(i);
     }
-    // dll1.addToLinkedListAtFront(10);
     dll1.printLinkedList();
     dll1.printLinkedListReverse();
+
+    for (int i = 10; i <= 15; i++)
+    {
+        dll2.addToLinkedListAtEnd(i);
+    }
+
+    cout << "Merging two doubly linked list" << endl;
+    dll3 = mergeTwoLinkedLists(dll1, dll2);
+    dll3.printLinkedList();
+    dll3.printLinkedListReverse();
+
+    cout << "Adding at index in doubly linked list" << endl;
+    dll3.addToLinkedListAtIndex(100, 5);
+    dll3.printLinkedList();
+    dll3.printLinkedListReverse();
+
+    cout << "Finding index of element in doubly linked list" << endl;
+    cout << "Index of 10: " << dll3.indexOfData(10) << endl;
+
+    cout << "Deleting the start of doubly linked list" << endl;
+    dll3.deleteFromLinkedList(0);
+    dll3.printLinkedList();
+    dll3.printLinkedListReverse();
+
+    cout << "Deleting random index of doubly linked list" << endl;
+    dll3.deleteFromLinkedList(10);
+    dll3.printLinkedList();
+    dll3.printLinkedListReverse();
+
+    cout << "Deleting last index of doubly linked list" << endl;
+    int c = dll3.getCount();
+    dll3.deleteFromLinkedList(c - 1);
+    dll3.printLinkedList();
+    dll3.printLinkedListReverse();
+
+    cout << "Sorting doubly linked list" << endl;
+    dll3.sortLinkedList();
+    dll3.printLinkedList();
+    dll3.printLinkedListReverse();
+
+    cout << "Reversing doubly linked list" << endl;
+    dll3.reverseLinkedList();
+    dll3.printLinkedList();
+    dll3.printLinkedListReverse();
+
     return 0;
 }
