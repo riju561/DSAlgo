@@ -100,19 +100,40 @@ func reverseArray(n int, arr []int) []int {
 	return arr
 }
 
+// func main() {
+// 	var a = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+// 	fmt.Println(a)
+// 	c := reverseArray(len(a), a)
+// 	for i := 0; i < len(c); i++ {
+// 		fmt.Printf("%d ", c[i])
+// 	}
+// 	fmt.Println()
+// 	var b = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+// 	fmt.Println(b)
+// 	d := reverseArray(len(b), b)
+// 	for i := 0; i < len(d); i++ {
+// 		fmt.Printf("%d ", d[i])
+// 	}
+// 	fmt.Println()
+// }
+
+// Taking array as input
 func main() {
-	var a = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	fmt.Println(a)
-	c := reverseArray(len(a), a)
-	for i := 0; i < len(c); i++ {
-		fmt.Printf("%d ", c[i])
+	var size int
+	fmt.Scanln(&size)
+	var arr = make([]int, size)
+	for i := 0; i < size; i++ {
+		fmt.Scanf("%d", &arr[i])
+	}
+	for i := 0; i < size; i++ {
+		fmt.Printf("%d ", arr[i])
 	}
 	fmt.Println()
-	var b = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	fmt.Println(b)
-	d := reverseArray(len(b), b)
+	fmt.Println(arr)
+	d := reverseArray(len(arr), arr)
 	for i := 0; i < len(d); i++ {
 		fmt.Printf("%d ", d[i])
 	}
 	fmt.Println()
+	fmt.Println(d)
 }

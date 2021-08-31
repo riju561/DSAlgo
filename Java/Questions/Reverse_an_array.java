@@ -18,37 +18,38 @@ public class Reverse_an_array {
 
         // Method 1:- use a function
 
-        // int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        // for(int i=0;i<arr.length;i++){
-        // System.out.printf("%d ",arr[i]);
-        // }
-        // System.out.println();
-        // int arr_1[] = reverseArray(arr);
-        // for (int i = 0; i < arr_1.length; i++) {
-        // System.out.printf("%d ", arr_1[i]);
-        // }
-        // System.out.println();
-        // int arr2[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        // for (int i = 0; i < arr2.length; i++) {
-        // System.out.printf("%d ", arr2[i]);
-        // }
-        // System.out.println();
-        // int arr_2[] = reverseArray(arr2);
-        // for (int i = 0; i < arr_2.length; i++) {
-        // System.out.printf("%d ", arr_2[i]);
-        // }
-        // System.out.println();
+        int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        for(int i=0;i<arr.length;i++){
+        System.out.printf("%d ",arr[i]);
+        }
+        System.out.println();
+        int arr_1[] = reverseArray(arr);
+        for (int i = 0; i < arr_1.length; i++) {
+        System.out.printf("%d ", arr_1[i]);
+        }
+        System.out.println();
+        int arr2[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        for (int i = 0; i < arr2.length; i++) {
+        System.out.printf("%d ", arr2[i]);
+        }
+        System.out.println();
+        int arr_2[] = reverseArray(arr2);
+        for (int i = 0; i < arr_2.length; i++) {
+        System.out.printf("%d ", arr_2[i]);
+        }
+        System.out.println();
 
         //Method 2:- use list
 
-        Integer[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        Integer[] arr3 = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         for (int i = 0; i < arr.length; i++) {
             System.out.printf("%d ", arr[i]);
         }
         System.out.println();
         List<Integer> list = new ArrayList<>();
-        list = Arrays.asList(arr);
+        list = Arrays.asList(arr3);
         Collections.reverse(list);
         System.out.println(list);
+        list.forEach(System.out::print);
     }
 }
