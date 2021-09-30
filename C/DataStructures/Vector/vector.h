@@ -1,5 +1,5 @@
-#ifndef VECTOR_VECTOR_H
-#define VECTOR_VECTOR_H
+#ifndef VECTOR_H
+#define VECTOR_H
 
 /*
  * Vector module.
@@ -243,4 +243,4 @@ vec_rnext(VecIt it);
 VecValue
 vec_at(VecIt it);
 
-#endif /* VECTOR_VECTOR_H */
+#endif /* VECTOR_H */
