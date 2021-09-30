@@ -43,19 +43,6 @@
  * }
  * ~~~~~~~~~~~~~~
  *
- * The same goes about the reverse iterators.
- *
- * ~~~~~~~~~~~~~~
- * ListIt it;
- * for (it = ll_rbegin(l); it != ll_rend(l); it = ll_rnext(it)) {
- * 	do_something_with(ll_at(it));
- * }
- *
- * for_each_in_ll_rev(it, l) {
- * 	do_something_with(ll_at(it));
- * }
- * ~~~~~~~~~~~~~~
- *
  * Discover all the other functions
  * below and enjoy :D
  */
@@ -67,9 +54,6 @@ typedef struct LinkedListIt *ListIt;
 
 #define for_each_in_ll(i, l)                                                   \
 	for ((i) = ll_begin(l); (i) != ll_end(l); (i) = ll_next(i))
-
-#define for_each_in_ll_rev(i, l)                                               \
-	for ((i) = ll_rbegin(l); (i) != ll_rend(l); (i) = ll_rnext(i))
 
 /*
  * ~~~~~~~~~~~~~~
