@@ -81,6 +81,16 @@ Vec
 vec_new(void);
 
 /*
+ * Construct a Vec with
+ * the given capacity.
+ * The returned valued must
+ * be freed with vec_free when
+ * no longed needed.
+ */
+Vec
+vec_new_with_capacity(size_t capacity);
+
+/*
  * ~~~~~~~~~~~~~~
  * Destructors
  * ~~~~~~~~~~~~~~
@@ -151,6 +161,15 @@ vec_push(Vec v, VecValue val);
  */
 VecValue
 vec_pop(Vec v);
+
+/*
+ * Clears the vector,
+ * returning it to the
+ * default capacity and
+ * to 0 size.
+ */
+void
+vec_clear(Vec v);
 
 /*
  * ~~~~~~~~~~~~~~
