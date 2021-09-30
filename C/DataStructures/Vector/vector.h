@@ -168,6 +168,24 @@ vec_begin(Vec v);
 
 /*
  * Returns an iterator
+ * that points to the
+ * past-the-end item
+ * in the vector.
+ */
+VecIt
+vec_end(Vec v);
+
+/*
+ * Returns an iterator
+ * to the next item
+ * from the one the
+ * given iterator points to.
+ */
+VecIt
+vec_next(VecIt it);
+
+/*
+ * Returns an iterator
  * pointing to the
  * reverse beginning
  * of the vector.
@@ -178,29 +196,11 @@ vec_rbegin(Vec v);
 /*
  * Returns an iterator
  * that points to the
- * past-the-end item
- * in the vector.
- */
-VecIt
-vec_end(Vec v);
-
-/*
- * Returns an iterator
- * that points to the
  * before-the-start item
  * in the vector.
  */
 VecIt
 vec_rend(Vec v);
-
-/*
- * Returns an iterator
- * to the next item
- * from the one the
- * given iterator points to.
- */
-VecIt
-vec_next(VecIt it);
 
 /*
  * Returns an iterator
