@@ -10,7 +10,7 @@
  * change the ListValue typedef.
  *
  * Brief usage:
- * To construct a LinkedList item do
+ * To construct a List item do
  *
  * ~~~~~~~~~~~~~~
  * List l;
