@@ -184,7 +184,6 @@ vec_end(Vec v);
 VecIt
 vec_next(VecIt it);
 
-
 /*
  * Returns an iterator
  * pointing to the
