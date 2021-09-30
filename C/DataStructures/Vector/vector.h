@@ -1,5 +1,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
+#include <stddef.h>
 
 /*
  * Vector module.
@@ -28,7 +29,7 @@
  *
  * ~~~~~~~~~~~~~~
  * VecIt it;
- * for (it = vec_begin(v); it != vec_end(v); it = vec_next(it) {
+ * for (it = vec_begin(v); it != vec_end(v); it = vec_next(it)) {
  * 	do_something_with(vec_at(it));
  * }
  * ~~~~~~~~~~~~~~
@@ -46,7 +47,7 @@
  *
  * ~~~~~~~~~~~~~~
  * VecIt it;
- * for (it = vec_rbegin(v); it != vec_rend(v); it = vec_rnext(it) {
+ * for (it = vec_rbegin(v); it != vec_rend(v); it = vec_rnext(it)) {
  * 	do_something_with(vec_at(it));
  * }
  *
@@ -135,7 +136,7 @@ vec_capacity(Vec v);
  * Returns the item at
  * position idx (starting
  * from 0).
- * WARNING: if the vector has
+ * WARNING: If the vector has
  * less than idx + 1 items,
  * calling this function causes
  * undefined behaviour.
@@ -160,7 +161,7 @@ vec_push(Vec v, VecValue val);
 /*
  * Pops and returns the last
  * value in the vector.
- * WARNING: if the vector is
+ * WARNING: If the vector is
  * empty, calling this function
  * causes undefined behaviour.
  */
