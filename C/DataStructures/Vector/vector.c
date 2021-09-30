@@ -69,15 +69,33 @@ vec_begin(Vec v)
 }
 
 VecIt
+vec_rbegin(Vec v)
+{
+	return v->array + v->size - 1;
+}
+
+VecIt
 vec_end(Vec v)
 {
 	return v->array + v->size;
 }
 
 VecIt
+vec_rend(Vec v)
+{
+	return v->array - 1;
+}
+
+VecIt
 vec_next(VecIt it)
 {
 	return it + 1;
+}
+
+VecIt
+vec_rnext(VecIt it)
+{
+	return it - 1;
 }
 
 VecValue

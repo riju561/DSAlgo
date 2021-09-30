@@ -37,6 +37,19 @@
  * }
  * ~~~~~~~~~~~~~~
  *
+ * The same goes about the reverse iterators.
+ *
+ * ~~~~~~~~~~~~~~
+ * VecIt it;
+ * for (it = vec_rbegin(v); it != vec_rend(v); it = vec_rnext(it) {
+ * 	do_something_with(vec_at(it));
+ * }
+ *
+ * for_each_in_vec_rev(it, v) {
+ * 	do_something_with(vec_at(it));
+ * }
+ * ~~~~~~~~~~~~~~
+ *
  * Discover all the other functions
  * below and enjoy :D
  */
@@ -48,6 +61,9 @@ typedef VecValue *VecIt;
 
 #define for_each_in_vec(i, v)                                                  \
 	for ((i) = vec_begin(v); (i) != vec_end(v); (i) = vec_next(i))
+
+#define for_each_in_vec_rev(i, v)                                              \
+	for ((i) = vec_rbegin(v); (i) != vec_rend(v); (i) = vec_rnext(i))
 
 /*
  * ~~~~~~~~~~~~~~
@@ -138,7 +154,7 @@ vec_pop(Vec v);
 
 /*
  * ~~~~~~~~~~~~~~
- * Iterators
+ * Iterator
  * ~~~~~~~~~~~~~~
  */
 
@@ -152,6 +168,15 @@ vec_begin(Vec v);
 
 /*
  * Returns an iterator
+ * pointing to the
+ * reverse beginning
+ * of the vector.
+ */
+VecIt
+vec_rbegin(Vec v);
+
+/*
+ * Returns an iterator
  * that points to the
  * past-the-end item
  * in the vector.
@@ -161,12 +186,30 @@ vec_end(Vec v);
 
 /*
  * Returns an iterator
+ * that points to the
+ * before-the-start item
+ * in the vector.
+ */
+VecIt
+vec_rend(Vec v);
+
+/*
+ * Returns an iterator
  * to the next item
  * from the one the
  * given iterator points to.
  */
 VecIt
 vec_next(VecIt it);
+
+/*
+ * Returns an iterator
+ * to the previous item
+ * from the one the
+ * given iterator points to.
+ */
+VecIt
+vec_rnext(VecIt it);
 
 /*
  * Returns the item
