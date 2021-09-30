@@ -21,6 +21,16 @@ vec_new()
 	return v;
 }
 
+Vec
+vec_new_with_capacity(size_t capacity)
+{
+	struct Vector *v = malloc(sizeof(*v));
+	v->size = 0;
+	v->capacity = capacity;
+	v->array = malloc(capacity * sizeof(*v->array));
+	return v;
+}
+
 void
 vec_free(Vec v)
 {
@@ -54,6 +64,14 @@ VecValue
 vec_pop(Vec v)
 {
 	return v->array[--v->size];
+}
+
+void
+vec_clear(Vec v)
+{
+	v->capacity = INITIAL_CAPACITY;
+	v->size = 0;
+	v->array = realloc(v->array, INITIAL_CAPACITY * sizeof(*v->array));
 }
 
 VecValue
