@@ -3,6 +3,11 @@
 
 /*
  * Vector module.
+ *
+ * To change the type of
+ * items the vector takes,
+ * change the VecValue typedef.
+ *
  * Brief usage:
  * To construct a Vec item do
  *
