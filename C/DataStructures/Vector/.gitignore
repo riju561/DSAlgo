@@ -1,4 +1,4 @@
-./cmake-build-debug/
-./CMakeLists.txt
-./main.c
-./.clang-format
+cmake-build-debug/
+CMakeLists.txt
+main.c
+.clang-format

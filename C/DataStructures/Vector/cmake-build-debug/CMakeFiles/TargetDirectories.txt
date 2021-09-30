@@ -1,3 +1,0 @@
-/home/nikos-alexandris/src/C/repositories/DSAlgo/C/DataStructures/Vector/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/nikos-alexandris/src/C/repositories/DSAlgo/C/DataStructures/Vector/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/nikos-alexandris/src/C/repositories/DSAlgo/C/DataStructures/Vector/cmake-build-debug/CMakeFiles/vector.dir

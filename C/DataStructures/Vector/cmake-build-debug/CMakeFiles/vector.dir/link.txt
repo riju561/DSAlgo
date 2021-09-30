@@ -1,1 +1,0 @@
-clang -Weverything -g CMakeFiles/vector.dir/main.c.o CMakeFiles/vector.dir/vector.c.o -o vector 
