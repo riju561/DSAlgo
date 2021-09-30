@@ -1,4 +1,0 @@
-/home/nikos-alexandris/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/212.5284.51/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /home/nikos-alexandris/src/C/repositories/DSAlgo/C/DataStructures/Vector
--- Configuring done
--- Generating done
--- Build files have been written to: /home/nikos-alexandris/src/C/repositories/DSAlgo/C/DataStructures/Vector/cmake-build-debug
