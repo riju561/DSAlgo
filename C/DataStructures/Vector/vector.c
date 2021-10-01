@@ -11,7 +11,7 @@ struct Vector {
 	VecValue *array;
 };
 
-Vec
+struct Vector *
 vec_new()
 {
 	struct Vector *v = malloc(sizeof(*v));
@@ -21,7 +21,7 @@ vec_new()
 	return v;
 }
 
-Vec
+struct Vector *
 vec_new_with_capacity(size_t capacity)
 {
 	struct Vector *v = malloc(sizeof(*v));
@@ -32,26 +32,26 @@ vec_new_with_capacity(size_t capacity)
 }
 
 void
-vec_free(Vec v)
+vec_free(struct Vector *v)
 {
 	free(v->array);
 	free(v);
 }
 
 size_t
-vec_size(Vec v)
+vec_size(struct Vector *v)
 {
 	return v->size;
 }
 
 size_t
-vec_capacity(Vec v)
+vec_capacity(struct Vector *v)
 {
 	return v->capacity;
 }
 
 void
-vec_push(Vec v, VecValue val)
+vec_push(struct Vector *v, VecValue val)
 {
 	if (v->size == v->capacity) {
 		v->capacity *= GROWTH_FACTOR;
@@ -61,13 +61,13 @@ vec_push(Vec v, VecValue val)
 }
 
 VecValue
-vec_pop(Vec v)
+vec_pop(struct Vector *v)
 {
 	return v->array[--v->size];
 }
 
 void
-vec_clear(Vec v)
+vec_clear(struct Vector *v)
 {
 	v->capacity = INITIAL_CAPACITY;
 	v->size = 0;
@@ -75,31 +75,31 @@ vec_clear(Vec v)
 }
 
 VecValue
-vec_at_idx(Vec v, size_t idx)
+vec_at_idx(struct Vector *v, size_t idx)
 {
 	return v->array[idx];
 }
 
 VecIt
-vec_begin(Vec v)
+vec_begin(struct Vector *v)
 {
 	return v->array;
 }
 
 VecIt
-vec_rbegin(Vec v)
+vec_rbegin(struct Vector *v)
 {
 	return v->array + v->size - 1;
 }
 
 VecIt
-vec_end(Vec v)
+vec_end(struct Vector *v)
 {
 	return v->array + v->size;
 }
 
 VecIt
-vec_rend(Vec v)
+vec_rend(struct Vector *v)
 {
 	return v->array - 1;
 }
