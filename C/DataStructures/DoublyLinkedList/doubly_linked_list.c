@@ -61,16 +61,18 @@ dl_push_back(DList l, DListValue val)
 	node->item = val;
 	node->next = NULL;
 
-	l->size++;
-
 	if (l->size == 0) {
 		node->prev = NULL;
 		l->fst = l->lst = node;
+
+		l->size++;
 		return;
 	}
 
 	node->prev = l->lst;
 	l->lst = node;
+
+	l->size++;
 }
 
 void
@@ -80,16 +82,18 @@ dl_push_front(DList l, DListValue val)
 	node->item = val;
 	node->prev = NULL;
 
-	l->size++;
-
 	if (l->size == 0) {
 		node->next = NULL;
 		l->fst = l->lst = node;
+
+		l->size++;
 		return;
 	}
 
 	node->next = l->fst;
 	l->fst = node;
+
+	l->size++;
 }
 
 DListValue
