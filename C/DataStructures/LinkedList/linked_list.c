@@ -24,12 +24,11 @@ ll_new(void)
 void
 ll_free(List l)
 {
-	Node *n1, *n2;
-	n1 = l->head;
-	while (n1 != NULL) {
-		n2 = n1->next;
-		free(n1);
-		n1 = n2;
+	Node *tmp = l->head;
+	while (l->head) {
+		l->head = l->head->next;
+		free(tmp);
+		tmp = l->head;
 	}
 	free(l);
 }
@@ -75,20 +74,19 @@ ll_pop_front(List l)
 {
 	ListValue v = l->head->item;
 	l->head = l->head->next;
+	l->size--;
 	return v;
 }
 
 void
 ll_clear(List l)
 {
-	Node *n1, *n2;
-	n1 = l->head;
-	while (n1 != NULL) {
-		n2 = n1->next;
-		free(n1);
-		n1 = n2;
+	Node *tmp = l->head;
+	while (l->head) {
+		l->head = l->head->next;
+		free(tmp);
+		tmp = l->head;
 	}
-	l->head = NULL;
 	l->size = 0;
 }
 
@@ -99,7 +97,7 @@ ll_begin(List l)
 }
 
 ListIt
-ll_end(List v)
+ll_end(List __attribute__((unused))v)
 {
 	return NULL;
 }
