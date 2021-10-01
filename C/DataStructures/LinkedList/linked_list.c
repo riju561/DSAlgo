@@ -57,16 +57,18 @@ ll_push_front(List l, ListValue val)
 	Node *node = malloc(sizeof(*node));
 	node->item = val;
 
-	l->size++;
-
 	if (l->size == 0) {
 		node->next = NULL;
 		l->head = node;
+
+		l->size++;
 		return;
 	}
 
 	node->next = l->head;
 	l->head = node;
+
+	l->size++;
 }
 
 ListValue
