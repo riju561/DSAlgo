@@ -12,7 +12,7 @@ struct LinkedList {
 	Node *head;
 };
 
-List
+struct LinkedList *
 ll_new(void)
 {
 	struct LinkedList *l = malloc(sizeof(*l));
@@ -22,7 +22,7 @@ ll_new(void)
 }
 
 void
-ll_free(List l)
+ll_free(struct LinkedList *l)
 {
 	Node *tmp = l->head;
 	while (l->head) {
@@ -34,13 +34,13 @@ ll_free(List l)
 }
 
 size_t
-ll_size(List l)
+ll_size(struct LinkedList *l)
 {
 	return l->size;
 }
 
 ListValue
-ll_at_idx(List l, size_t idx)
+ll_at_idx(struct LinkedList *l, size_t idx)
 {
 	size_t i;
 	Node *n = l->head;
@@ -52,7 +52,7 @@ ll_at_idx(List l, size_t idx)
 }
 
 void
-ll_push_front(List l, ListValue val)
+ll_push_front(struct LinkedList *l, ListValue val)
 {
 	Node *node = malloc(sizeof(*node));
 	node->item = val;
@@ -72,7 +72,7 @@ ll_push_front(List l, ListValue val)
 }
 
 ListValue
-ll_pop_front(List l)
+ll_pop_front(struct LinkedList *l)
 {
 	ListValue v = l->head->item;
 	l->head = l->head->next;
@@ -81,7 +81,7 @@ ll_pop_front(List l)
 }
 
 void
-ll_clear(List l)
+ll_clear(struct LinkedList *l)
 {
 	Node *tmp = l->head;
 	while (l->head) {
@@ -93,13 +93,13 @@ ll_clear(List l)
 }
 
 ListIt
-ll_begin(List l)
+ll_begin(struct LinkedList *l)
 {
 	return l->head;
 }
 
 ListIt
-ll_end(List __attribute__((unused))v)
+ll_end(struct LinkedList *__attribute__((unused)) v)
 {
 	return NULL;
 }
@@ -109,7 +109,6 @@ ll_next(ListIt it)
 {
 	return it->next;
 }
-
 
 ListValue
 ll_at(ListIt it)
