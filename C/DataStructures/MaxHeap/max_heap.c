@@ -8,22 +8,30 @@ struct MaxHeap {
 	MaxHeapValue *array;
 	size_t size;
 	size_t capacity;
+
+	MaxHeapCmpFn cmp;
 };
 
 #define parent(i) ((i) / 2)
 #define left(i) (2 * (i))
 #define right(i) (2 * (i) + 1)
 
+#define gt(h, i, j) \
+	((h)->cmp == NULL     \
+	? (h)->array[i] > (h)->array[j] \
+	: (h)->cmp((h)->array[i], (h)->array[j]) > 0)
+
 static void
 heapify(struct MaxHeap *h, size_t i);
 
 struct MaxHeap *
-mah_new(void)
+mah_new(MaxHeapCmpFn cmp)
 {
 	struct MaxHeap *h = malloc(sizeof(*h));
 	h->size = 0;
 	h->capacity = INITIAL_CAPACITY;
 	h->array = malloc(INITIAL_CAPACITY * sizeof(*h->array));
+	h->cmp = cmp;
 	return h;
 }
 
@@ -59,7 +67,7 @@ mah_push(struct MaxHeap *h, MaxHeapValue val)
 
 	h->array[h->size++] = val;
 	curr = h->size - 1;
-	while (h->array[curr] > h->array[parent(curr)]) {
+	while (gt(h, curr, parent(curr))) {
 		tmp = h->array[curr];
 		h->array[curr] = h->array[parent(curr)];
 		h->array[parent(curr)] = tmp;
@@ -96,12 +104,12 @@ heapify(struct MaxHeap *h, size_t i)
 	l = left(i);
 	r = right(i);
 
-	if (l < h->size && h->array[l] > h->array[i])
+	if (l < h->size && gt(h, l, i))
 		max = l;
 	else
 		max = i;
 
-	if (r < h->size && h->array[r] > h->array[i])
+	if (r < h->size && gt(h, r, i))
 		max = r;
 
 	if (max != i) {
