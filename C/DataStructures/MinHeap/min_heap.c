@@ -17,9 +17,6 @@ struct MinHeap {
 static void
 heapify(struct MinHeap *h, size_t i);
 
-static void
-key_aug(struct MinHeap *h, size_t i, MinHeapValue key);
-
 struct MinHeap *
 mih_new(void)
 {
@@ -112,20 +109,5 @@ heapify(struct MinHeap *h, size_t i)
 		h->array[i] = h->array[min];
 		h->array[min] = val;
 		heapify(h, min);
-	}
-}
-
-static void
-key_aug(struct MinHeap *h, size_t i, MinHeapValue key)
-{
-	MinHeapValue val;
-
-	h->array[i] = key;
-	while (i > 0 && h->array[parent(i)] > h->array[i]) {
-		val = h->array[i];
-		h->array[i] = h->array[parent(i)];
-		h->array[parent(i)] = val;
-
-		i = parent(i);
 	}
 }
