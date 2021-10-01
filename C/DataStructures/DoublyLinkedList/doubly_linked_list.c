@@ -14,7 +14,7 @@ struct DoublyLinkedList {
 	Node *lst;
 };
 
-DList
+struct DoublyLinkedList *
 dl_new(void)
 {
 	struct DoublyLinkedList *l = malloc(sizeof(*l));
@@ -24,7 +24,7 @@ dl_new(void)
 }
 
 void
-dl_free(DList l)
+dl_free(struct DoublyLinkedList *l)
 {
 	Node *tmp = l->fst;
 	while (l->fst != l->lst) {
@@ -37,13 +37,13 @@ dl_free(DList l)
 }
 
 size_t
-dl_size(DList l)
+dl_size(struct DoublyLinkedList *l)
 {
 	return l->size;
 }
 
 DListValue
-dl_at_idx(DList l, size_t idx)
+dl_at_idx(struct DoublyLinkedList *l, size_t idx)
 {
 	size_t i;
 	Node *n = l->fst;
@@ -55,7 +55,7 @@ dl_at_idx(DList l, size_t idx)
 }
 
 void
-dl_push_back(DList l, DListValue val)
+dl_push_back(struct DoublyLinkedList *l, DListValue val)
 {
 	Node *node = malloc(sizeof(*node));
 	node->item = val;
@@ -77,7 +77,7 @@ dl_push_back(DList l, DListValue val)
 }
 
 void
-dl_push_front(DList l, DListValue val)
+dl_push_front(struct DoublyLinkedList *l, DListValue val)
 {
 	Node *node = malloc(sizeof(*node));
 	node->item = val;
@@ -99,7 +99,7 @@ dl_push_front(DList l, DListValue val)
 }
 
 DListValue
-dl_pop_back(DList l)
+dl_pop_back(struct DoublyLinkedList *l)
 {
 	DListValue v = l->lst->item;
 	l->lst = l->lst->prev;
@@ -108,7 +108,7 @@ dl_pop_back(DList l)
 }
 
 DListValue
-dl_pop_front(DList l)
+dl_pop_front(struct DoublyLinkedList *l)
 {
 	DListValue v = l->fst->item;
 	l->fst = l->fst->next;
@@ -117,7 +117,7 @@ dl_pop_front(DList l)
 }
 
 void
-dl_clear(DList l)
+dl_clear(struct DoublyLinkedList *l)
 {
 	Node *tmp = l->fst;
 	while (l->fst != l->lst) {
@@ -131,13 +131,13 @@ dl_clear(DList l)
 }
 
 DListIt
-dl_begin(DList l)
+dl_begin(struct DoublyLinkedList *l)
 {
 	return l->fst;
 }
 
 DListIt
-dl_end(DList __attribute__((unused))v)
+dl_end(struct DoublyLinkedList *__attribute__((unused)) v)
 {
 	return NULL;
 }
@@ -149,13 +149,13 @@ dl_next(DListIt it)
 }
 
 DListIt
-dl_rbegin(DList l)
+dl_rbegin(struct DoublyLinkedList *l)
 {
 	return l->lst;
 }
 
 DListIt
-dl_rend(DList __attribute__((unused))v)
+dl_rend(struct DoublyLinkedList *__attribute__((unused)) v)
 {
 	return NULL;
 }
