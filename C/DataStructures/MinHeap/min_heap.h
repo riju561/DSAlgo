@@ -62,6 +62,10 @@ typedef struct MinHeap *MinHeap;
  * The returned valued must
  * be freed with mih_free when
  * no longed needed.
+ *
+ * Read the description note if
+ * you don't know what to pass as
+ * argument.
  */
 MinHeap
 mih_new(MinHeapCmpFn cmp);
