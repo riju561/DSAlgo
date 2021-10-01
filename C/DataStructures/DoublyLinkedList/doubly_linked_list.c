@@ -70,6 +70,7 @@ dl_push_back(DList l, DListValue val)
 	}
 
 	node->prev = l->lst;
+	l->lst->next = node;
 	l->lst = node;
 
 	l->size++;
@@ -91,6 +92,7 @@ dl_push_front(DList l, DListValue val)
 	}
 
 	node->next = l->fst;
+	l->fst->prev = node;
 	l->fst = node;
 
 	l->size++;
