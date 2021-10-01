@@ -56,7 +56,7 @@ mih_new(void);
  * Frees a MinHeap value.
  */
 void
-mih_free(MinHeap);
+mih_free(MinHeap h);
 
 /*
  * ~~~~~~~~~~~~~~
@@ -70,7 +70,7 @@ mih_free(MinHeap);
  * so far.
  */
 size_t
-mih_size(MinHeap);
+mih_size(MinHeap h);
 
 /*
  * Access the top element
@@ -80,7 +80,7 @@ mih_size(MinHeap);
  * causes undefined behaviour.
  */
 MinHeapValue
-mih_top(MinHeap);
+mih_top(MinHeap h);
 
 /*
  * ~~~~~~~~~~~~~~
@@ -94,7 +94,7 @@ mih_top(MinHeap);
  * its size by 1.
  */
 void
-mih_push(MinHeap, MinHeapValue);
+mih_push(MinHeap h, MinHeapValue val);
 
 /*
  * Pops and returns the top
@@ -104,7 +104,7 @@ mih_push(MinHeap, MinHeapValue);
  * causes undefined behaviour.
  */
 MinHeapValue
-mih_pop(MinHeap);
+mih_pop(MinHeap h);
 
 /*
  * Clears the heap,
@@ -112,6 +112,6 @@ mih_pop(MinHeap);
  * to 0.
  */
 void
-mih_clear(MinHeap);
+mih_clear(MinHeap h);
 
 #endif /* MIN_HEAP_H */
