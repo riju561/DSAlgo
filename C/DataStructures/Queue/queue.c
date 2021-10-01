@@ -13,7 +13,7 @@ struct Queue {
 	struct Node *lst;
 };
 
-Queue
+struct Queue *
 qu_new(void)
 {
 	struct Queue *q = malloc(sizeof(*q));
@@ -23,7 +23,7 @@ qu_new(void)
 }
 
 void
-qu_free(Queue q)
+qu_free(struct Queue *q)
 {
 	struct Node *tmp = q->fst;
 	while (q->fst != q->lst) {
@@ -36,19 +36,19 @@ qu_free(Queue q)
 }
 
 size_t
-qu_size(Queue q)
+qu_size(struct Queue *q)
 {
 	return q->size;
 }
 
 QueueValue
-qu_top(Queue q)
+qu_top(struct Queue *q)
 {
 	return q->lst->item;
 }
 
 void
-qu_push(Queue q, QueueValue val)
+qu_push(struct Queue *q, QueueValue val)
 {
 	struct Node *node = malloc(sizeof(*node));
 	node->item = val;
@@ -70,7 +70,7 @@ qu_push(Queue q, QueueValue val)
 }
 
 QueueValue
-qu_pop(Queue q)
+qu_pop(struct Queue *q)
 {
 	QueueValue v = q->lst->item;
 	q->lst = q->lst->prev;
@@ -79,7 +79,7 @@ qu_pop(Queue q)
 }
 
 void
-qu_clear(Queue q)
+qu_clear(struct Queue *q)
 {
 	struct Node *tmp = q->fst;
 	while (q->fst != q->lst) {
