@@ -68,7 +68,7 @@ typedef struct DoublyLinkedListIt *DListIt;
 #define for_each_in_dl(i, l)                                                   \
 	for ((i) = dl_begin(l); (i) != dl_end(l); (i) = dl_next(i))
 
-#define for_each_in_dl_rev(i, l)                                             \
+#define for_each_in_dl_rev(i, l)                                               \
 	for ((i) = dl_rbegin(l); (i) != dl_rend(l); (i) = dl_rnext(i))
 
 /*
