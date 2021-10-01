@@ -9,12 +9,30 @@
  * items the heap takes,
  * change the MinHeapValue typedef.
  *
+ * NOTE: The heap keeps items
+ * ordered, so it needs to know
+ * how to order them. If the items
+ * are basic like int or char, then
+ * pass NULL to the mih_new function.
+ * If the values are a custom struct,
+ * then you will need to provide a
+ * pointer to a function of type
+ * int custom_compare(MinHeapValue l, MinHeapValue r)
+ * where the return values must be:
+ * if l == r -> 0
+ * if l <  r -> < 0
+ * if l >  r -> > 0
+ * So if, for example, you want to keep a min heap
+ * of strings, you can set the MinHeapValue typedef
+ * to const char *, and pass the strcmp function to
+ * mih_new like so: MinHeap h = mih_new(strcmp).
+ *
  * Brief usage:
  * To construct a MinHeap item do
  *
  * ~~~~~~~~~~~~~~
  * MinHeap h;
- * h = mih_new();
+ * h = mih_new(NULL);
  * ~~~~~~~~~~~~~~
  *
  * And to free it do
@@ -27,7 +45,9 @@
  * below and enjoy :D
  */
 
-typedef int MinHeapValue;
+typedef const char * MinHeapValue;
+
+typedef int (*MinHeapCmpFn)(MinHeapValue a, MinHeapValue b);
 
 typedef struct MinHeap *MinHeap;
 
@@ -44,7 +64,7 @@ typedef struct MinHeap *MinHeap;
  * no longed needed.
  */
 MinHeap
-mih_new(void);
+mih_new(MinHeapCmpFn cmp);
 
 /*
  * ~~~~~~~~~~~~~~
