@@ -45,7 +45,7 @@
  * below and enjoy :D
  */
 
-typedef const char * MinHeapValue;
+typedef int MinHeapValue;
 
 typedef int (*MinHeapCmpFn)(MinHeapValue a, MinHeapValue b);
 
