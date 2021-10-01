@@ -10,7 +10,7 @@ struct Stack {
 	size_t capacity;
 };
 
-Stk
+struct Stack *
 stk_new(void)
 {
 	struct Stack *s = malloc(sizeof(*s));
@@ -20,7 +20,7 @@ stk_new(void)
 	return s;
 }
 
-Stk
+struct Stack *
 stk_new_with_capacity(size_t capacity)
 {
 	struct Stack *s = malloc(sizeof(*s));
@@ -31,26 +31,26 @@ stk_new_with_capacity(size_t capacity)
 }
 
 void
-stk_free(Stk s)
+stk_free(struct Stack *s)
 {
 	free(s->array);
 	free(s);
 }
 
 size_t
-stk_size(Stk s)
+stk_size(struct Stack *s)
 {
 	return s->size;
 }
 
 StackValue
-stk_top(Stk s)
+stk_top(struct Stack *s)
 {
 	return s->array[s->size - 1];
 }
 
 void
-stk_push(Stk s, StackValue val)
+stk_push(struct Stack *s, StackValue val)
 {
 	if (s->size == s->capacity) {
 		s->capacity *= GROWTH_FACTOR;
@@ -60,13 +60,13 @@ stk_push(Stk s, StackValue val)
 }
 
 StackValue
-stk_pop(Stk s)
+stk_pop(struct Stack *s)
 {
 	return s->array[--s->size];
 }
 
 void
-stk_clear(Stk s)
+stk_clear(struct Stack *s)
 {
 	s->capacity = INITIAL_CAPACITY;
 	s->size = 0;
