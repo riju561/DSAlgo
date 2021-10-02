@@ -1,6 +1,3 @@
-// C program to demonstrate insert
-// operation in binary
-// search tree.
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -8,6 +5,8 @@ struct node {
 	int key;
 	struct node *left, *right;
 };
+
+
 
 // A utility function to create a new BST node
 struct node* newNode(int item)
@@ -116,7 +115,7 @@ struct node* deleteNode(struct node* root, int key)
     }
     return root;
 }
-// Driver Code
+
 int main()
 {
 	/* Let us create following BST
@@ -158,5 +157,4 @@ int main()
         }
     }
     return 0;
-	return 0;
 }
